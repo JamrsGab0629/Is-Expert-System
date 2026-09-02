@@ -1,21 +1,22 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: "class",
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
-        paper: "#FAFAF8",
-        "paper-alt": "#F1EFE9",
-        ink: "#1C1D1A",
-        "ink-soft": "#57584F",
-        "ink-faint": "#8A8B80",
-        line: "#DBD8CE",
-        "line-soft": "#E9E7DF",
-        accent: "#33524D",
-        "accent-hover": "#25403C",
-        "accent-tint": "#E7EDE9",
-        moss: "#6C7A4C",
-        rust: "#9C5A3C",
+        paper: "rgb(var(--color-paper) / <alpha-value>)",
+        "paper-alt": "rgb(var(--color-paper-alt) / <alpha-value>)",
+        ink: "rgb(var(--color-ink) / <alpha-value>)",
+        "ink-soft": "rgb(var(--color-ink-soft) / <alpha-value>)",
+        "ink-faint": "rgb(var(--color-ink-faint) / <alpha-value>)",
+        line: "rgb(var(--color-line) / <alpha-value>)",
+        "line-soft": "rgb(var(--color-line-soft) / <alpha-value>)",
+        accent: "rgb(var(--color-accent) / <alpha-value>)",
+        "accent-hover": "rgb(var(--color-accent-hover) / <alpha-value>)",
+        "accent-tint": "rgb(var(--color-accent-tint) / <alpha-value>)",
+        moss: "rgb(var(--color-moss) / <alpha-value>)",
+        rust: "rgb(var(--color-rust) / <alpha-value>)",
       },
       fontFamily: {
         serif: ["\"Source Serif 4\"", "Georgia", "\"Iowan Old Style\"", "serif"],

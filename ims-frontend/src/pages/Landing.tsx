@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import ThemeToggle from "../components/ThemeToggle";
 
 const STEPS = [
   {
@@ -25,13 +26,16 @@ export default function Landing() {
     <div className="min-h-screen bg-paper text-ink flex flex-col">
       <header className="px-6 sm:px-10 py-6 flex items-center justify-between">
         <p className="text-sm text-ink-soft">Information Management</p>
-        <button
-          type="button"
-          onClick={() => navigate("/dashboard")}
-          className="text-sm text-ink-soft hover:text-ink transition-colors"
-        >
-          Skip to dashboard
-        </button>
+        <div className="flex items-center gap-4">
+          <ThemeToggle variant="icon" />
+          <button
+            type="button"
+            onClick={() => navigate("/dashboard")}
+            className="text-sm text-ink-soft hover:text-ink transition-colors"
+          >
+            Skip to dashboard
+          </button>
+        </div>
       </header>
 
       <main className="flex-1 flex items-center">

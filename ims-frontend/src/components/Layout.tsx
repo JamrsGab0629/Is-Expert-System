@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import type { ReactNode } from "react";
 import { useAssessment } from "../context/AssessmentContext";
 import type { Density } from "../context/AssessmentContext";
+import ThemeToggle from "./ThemeToggle";
 
 const NAV_ITEMS = [
   { to: "/dashboard", label: "Dashboard", end: true },
@@ -83,6 +84,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           <div className="text-xs text-ink-faint mb-6">
             {answeredCount} of {totalCount} answered
           </div>
+          <ThemeToggle className="mb-6" />
           <DensityControl />
         </div>
       </aside>
@@ -91,9 +93,12 @@ export default function Layout({ children }: { children: ReactNode }) {
       <header className="lg:hidden border-b border-line px-4 sm:px-6 py-4 sticky top-0 bg-paper z-10">
         <div className="flex items-center justify-between">
           <p className="font-serif text-base text-ink">Information Management</p>
-          <span className="text-xs text-ink-faint">
-            {answeredCount}/{totalCount}
-          </span>
+          <div className="flex items-center gap-3">
+            <span className="text-xs text-ink-faint">
+              {answeredCount}/{totalCount}
+            </span>
+            <ThemeToggle variant="icon" />
+          </div>
         </div>
         <nav
           className="flex gap-4 mt-4 overflow-x-auto"
