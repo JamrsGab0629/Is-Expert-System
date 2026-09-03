@@ -9,12 +9,15 @@ import QuestionStatusList from "../components/QuestionStatusList";
 export default function Assessment() {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
-  const { answers, setAnswer, currentIndex, setCurrentIndex, density, totalCount } =
+  const { answers, setAnswer, currentIndex, setCurrentIndex, density, totalCount, submitted, resetAssessment } =
     useAssessment();
   const scale = getDensityScale(density);
   const [showList, setShowList] = useState(false);
 
   useEffect(() => {
+    if (submitted) {
+      resetAssessment();
+    }
     const qParam = searchParams.get("q");
     if (qParam) {
       const idx = questions.findIndex((q) => q.id === Number(qParam));

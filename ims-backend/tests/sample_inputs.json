@@ -1,0 +1,53 @@
+{
+  "low_risk": {
+    "1": "Database records",
+    "2": "New data is filed by department and tagged with a data owner as soon as it arrives.",
+    "3": "Access is role-based; only admins and the assigned department can view records after manager approval.",
+    "4": "Anything containing personal information, financial data, or credentials is marked confidential.",
+    "5": "We run duplicate checks and validation scripts weekly and audit a sample manually.",
+    "6": "We reconcile against the source of truth system and escalate to the data owner if it persists.",
+    "7": "Data older than 2 years with no access is archived per our retention policy.",
+    "8": true,
+    "9": "By potential impact or risk",
+    "10": "Mismatched customer IDs are the most common issue; we fix by re-running the sync job.",
+    "11": "PostgreSQL, an internal admin dashboard, and cloud backups",
+    "12": "Weekly",
+    "13": "Attempts are denied, logged, and an alert is sent to the security channel.",
+    "14": "We run a quarterly reconciliation and periodic audits against source systems.",
+    "15": "Last year a batch import duplicated 4,000 customer records; we wrote a de-dup script, restored from backup, and added a validation step to the import pipeline."
+  },
+  "moderate_risk": {
+    "1": "Files",
+    "2": "We put new files into whichever folder seems related; there's no fixed categorization rule beyond that.",
+    "3": "Certain people are supposed to open certain folders, but there isn't a written policy for it.",
+    "4": "We don't have a fixed rule for this, it just depends on the file and who's asking.",
+    "5": "Someone usually gives it a quick review if a number looks wrong, but there's no formal check.",
+    "6": "We compare it with the original file and go with whichever one looks more recent.",
+    "7": "We don't have a set rule; someone just cleans things up occasionally when the folder gets too full.",
+    "8": false,
+    "9": "First-come, first-served",
+    "10": "Old files piling up is the main issue; someone eventually goes through and deletes old ones.",
+    "11": "Shared network drive and email",
+    "12": "Monthly",
+    "13": "It gets logged automatically, though we don't always follow up on it.",
+    "14": "We don't really have a set process for that; we just fix things if someone points them out.",
+    "15": ""
+  },
+  "high_risk": {
+    "1": "Logs",
+    "2": "",
+    "3": "",
+    "4": "",
+    "5": "",
+    "6": "",
+    "7": "",
+    "8": false,
+    "9": "First-come, first-served",
+    "10": "",
+    "11": "",
+    "12": "Never",
+    "13": "",
+    "14": "",
+    "15": ""
+  }
+}

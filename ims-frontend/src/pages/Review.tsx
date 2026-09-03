@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { questions } from "../data/questions";
 import { useAssessment } from "../context/AssessmentContext";
 import { getDensityScale } from "../lib/density";
+import { submitAssessment, AssessmentSubmitError } from "../lib/api";
 
 function formatAnswer(value: unknown): string {
   if (typeof value === "boolean") return value ? "Yes" : "No";
@@ -11,9 +13,36 @@ function formatAnswer(value: unknown): string {
 
 export default function Review() {
   const navigate = useNavigate();
-  const { answers, answeredCount, totalCount, submitted, setSubmitted, density } =
-    useAssessment();
+  const {
+    answers,
+    answeredCount,
+    totalCount,
+    submitted,
+    setSubmitted,
+    setResult,
+    density,
+  } = useAssessment();
   const scale = getDensityScale(density);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async () => {
+    setSubmitting(true);
+    setError(null);
+    try {
+      const result = await submitAssessment(answers);
+      setResult(result);
+      setSubmitted(true);
+    } catch (err) {
+      setError(
+        err instanceof AssessmentSubmitError
+          ? err.message
+          : "Something went wrong while submitting. Please try again."
+      );
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   if (submitted) {
     return (
@@ -23,13 +52,22 @@ export default function Review() {
           Assessment Completed
         </h1>
         <p className="text-ink-soft mt-3">Your responses have been recorded.</p>
-        <button
-          type="button"
-          onClick={() => navigate("/dashboard")}
-          className="mt-8 inline-flex items-center bg-accent text-paper text-sm font-medium px-5 py-2.5 rounded-sm hover:bg-accent-hover transition-colors"
-        >
-          Return to Dashboard
-        </button>
+        <div className="flex flex-wrap items-center gap-4 mt-8">
+          <button
+            type="button"
+            onClick={() => navigate("/dashboard")}
+            className="inline-flex items-center bg-accent text-paper text-sm font-medium px-5 py-2.5 rounded-sm hover:bg-accent-hover transition-colors"
+          >
+            Return to Dashboard
+          </button>
+          <button
+            type="button"
+            onClick={() => navigate("/result")}
+            className="text-sm text-accent hover:text-accent-hover"
+          >
+            View assessment result (demo)
+          </button>
+        </div>
       </div>
     );
   }
@@ -82,20 +120,28 @@ export default function Review() {
         })}
       </div>
 
+      {error && (
+        <div className="mt-8 border border-rust/40 bg-rust/5 text-sm text-rust rounded-sm px-4 py-3">
+          {error}
+        </div>
+      )}
+
       <div className="flex items-center justify-between border-t border-line mt-8 pt-6">
         <button
           type="button"
           onClick={() => navigate("/assessment")}
-          className="text-sm font-medium text-ink-soft hover:text-ink px-4 py-2 border border-line rounded-sm transition-colors"
+          disabled={submitting}
+          className="text-sm font-medium text-ink-soft hover:text-ink px-4 py-2 border border-line rounded-sm transition-colors disabled:opacity-50"
         >
           Back to Assessment
         </button>
         <button
           type="button"
-          onClick={() => setSubmitted(true)}
-          className="text-sm font-medium text-paper bg-accent hover:bg-accent-hover px-5 py-2 rounded-sm transition-colors"
+          onClick={handleSubmit}
+          disabled={submitting}
+          className="text-sm font-medium text-paper bg-accent hover:bg-accent-hover px-5 py-2 rounded-sm transition-colors disabled:opacity-60"
         >
-          Submit Assessment
+          {submitting ? "Submitting…" : "Submit Assessment"}
         </button>
       </div>
     </div>

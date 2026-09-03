@@ -7,6 +7,7 @@ import Dashboard from "./pages/Dashboard";
 import Assessment from "./pages/Assessment";
 import QuestionBank from "./pages/QuestionBank";
 import Review from "./pages/Review";
+import Result from "./pages/Result";
 
 export default function App() {
   return (
@@ -44,6 +45,14 @@ export default function App() {
               element={
                 <Layout>
                   <Review />
+                </Layout>
+              }
+            />
+            <Route
+              path="/result"
+              element={
+                <Layout>
+                  <Result />
                 </Layout>
               }
             />

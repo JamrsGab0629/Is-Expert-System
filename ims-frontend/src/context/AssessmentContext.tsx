@@ -1,6 +1,7 @@
 import { createContext, useContext, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import { questions } from "../data/questions";
+import type { AssessmentResult } from "../lib/api";
 
 export type Density = "compact" | "comfortable" | "spacious";
 
@@ -16,10 +17,13 @@ interface AssessmentContextValue {
   setDensity: (density: Density) => void;
   submitted: boolean;
   setSubmitted: (submitted: boolean) => void;
+  result: AssessmentResult | null;
+  setResult: (result: AssessmentResult | null) => void;
   answeredCount: number;
   totalCount: number;
   progressPercent: number;
   isAnswered: (id: number) => boolean;
+  resetAssessment: () => void;
 }
 
 const AssessmentContext = createContext<AssessmentContextValue | undefined>(undefined);
@@ -29,6 +33,7 @@ export function AssessmentProvider({ children }: { children: ReactNode }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [density, setDensity] = useState<Density>("comfortable");
   const [submitted, setSubmitted] = useState(false);
+  const [result, setResult] = useState<AssessmentResult | null>(null);
 
   const setAnswer = (id: number, value: AnswerValue) => {
     setAnswers((prev) => ({ ...prev, [id]: value }));
@@ -38,6 +43,13 @@ export function AssessmentProvider({ children }: { children: ReactNode }) {
     const value = answers[id];
     if (typeof value === "boolean") return true;
     return typeof value === "string" && value.trim().length > 0;
+  };
+
+  const resetAssessment = () => {
+    setAnswers({});
+    setCurrentIndex(0);
+    setSubmitted(false);
+    setResult(null);
   };
 
   const answeredCount = useMemo(
@@ -58,10 +70,13 @@ export function AssessmentProvider({ children }: { children: ReactNode }) {
     setDensity,
     submitted,
     setSubmitted,
+    result,
+    setResult,
     answeredCount,
     totalCount,
     progressPercent,
     isAnswered,
+    resetAssessment,
   };
 
   return <AssessmentContext.Provider value={value}>{children}</AssessmentContext.Provider>;

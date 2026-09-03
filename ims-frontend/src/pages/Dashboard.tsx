@@ -3,9 +3,17 @@ import { useAssessment } from "../context/AssessmentContext";
 
 export default function Dashboard() {
   const navigate = useNavigate();
-  const { answeredCount, totalCount, progressPercent, submitted } = useAssessment();
+  const { answeredCount, totalCount, progressPercent, submitted, resetAssessment } =
+    useAssessment();
 
   const notStarted = answeredCount === 0 && !submitted;
+
+  const handleStart = () => {
+    if (submitted) {
+      resetAssessment();
+    }
+    navigate("/assessment");
+  };
 
   return (
     <div className="max-w-content animate-fade-in">
@@ -37,10 +45,14 @@ export default function Dashboard() {
       </div>
 
       <button
-        onClick={() => navigate("/assessment")}
+        onClick={handleStart}
         className="mt-10 inline-flex items-center bg-accent text-paper text-sm font-medium px-5 py-2.5 rounded-sm hover:bg-accent-hover transition-colors"
       >
-        {answeredCount > 0 && !submitted ? "Continue Assessment" : "Start Assessment"}
+        {submitted
+          ? "Start New Assessment"
+          : answeredCount > 0
+          ? "Continue Assessment"
+          : "Start Assessment"}
       </button>
 
       <section className="mt-14">
