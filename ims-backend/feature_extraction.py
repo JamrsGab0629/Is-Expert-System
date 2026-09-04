@@ -1,15 +1,4 @@
-"""
-feature_extraction.py
 
-Converts the raw answers coming from the React frontend into the
-discrete indicator values the CLIPS knowledge base reasons over.
-
-Every question in the frontend is now a fixed set of preset choices
-(radio / select / boolean) rather than free text, so this file is a
-direct, deterministic lookup from the exact answer text to a value —
-no keyword guessing, no heuristics, no ambiguity. See
-knowledge_base.md for the full mapping this file implements.
-"""
 
 from __future__ import annotations
 from typing import Any
