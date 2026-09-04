@@ -74,3 +74,14 @@ is it ad hoc / absent?"** — and treating a small number of those areas
 response) as materially more urgent than the rest. That distinction between
 "high-urgency gap" and "moderate-urgency gap" is exactly what became the
 severity levels in the knowledge base and rules (Sections 3–4).
+
+## 2.d — Note on answer format
+
+The frontend originally collected answers 2–7, 10, 11, and 13–15 as free
+text. They were later converted to four preset choices per question (see
+`knowledge_base.md` §3.d) once testing showed free-text answers were too
+easy to mis-read with keyword matching. The template answers in §2.b above
+still describe the underlying situation in prose; when actually run through
+the app, each of those would be selected as the closest matching preset
+option (e.g. "Access is role-based; only admins... after manager approval"
+→ *"Yes — formal role-based access with an approval process"*).

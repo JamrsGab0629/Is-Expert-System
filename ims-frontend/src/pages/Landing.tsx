@@ -23,8 +23,8 @@ export default function Landing() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-paper text-ink flex flex-col">
-      <header className="px-6 sm:px-10 py-6 flex items-center justify-between">
+    <div className="min-h-screen bg-paper text-ink">
+      <header className="px-6 sm:px-10 py-6 flex items-center justify-between border-b border-line">
         <p className="text-sm text-ink-soft">Information Management</p>
         <div className="flex items-center gap-4">
           <ThemeToggle variant="icon" />
@@ -38,8 +38,9 @@ export default function Landing() {
         </div>
       </header>
 
-      <main className="flex-1 flex items-center">
-        <div className="w-full max-w-content mx-auto px-6 sm:px-10 py-16">
+      <main>
+        {/* Hero */}
+        <section className="max-w-content mx-auto px-6 sm:px-10 py-16 sm:py-20">
           <p className="text-xs font-medium text-ink-faint">Expert System</p>
           <h1 className="font-serif text-4xl sm:text-5xl text-ink leading-tight mt-3">
             Information Management
@@ -60,22 +61,75 @@ export default function Landing() {
             Begin Assessment
           </button>
 
-          <div className="mt-16 border-t border-line pt-10 grid gap-8 sm:grid-cols-3">
-            {STEPS.map((step) => (
-              <div key={step.n}>
-                <p className="text-xs text-ink-faint tabular-nums">{step.n}</p>
-                <p className="text-sm font-medium text-ink mt-2">{step.title}</p>
-                <p className="text-sm text-ink-soft mt-1.5 leading-relaxed">
-                  {step.body}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          <p className="text-xs text-ink-faint mt-14">
+          <p className="text-xs text-ink-faint mt-6">
             15 questions · about 10–15 minutes
           </p>
-        </div>
+        </section>
+
+        {/* Project rationale */}
+        <section className="border-t border-line">
+          <div className="max-w-content mx-auto px-6 sm:px-10 py-16 sm:py-20">
+            <p className="text-xs font-medium text-ink-faint">Project Rationale</p>
+            <h2 className="font-serif text-2xl sm:text-3xl text-ink mt-3">
+              Why Information Management
+            </h2>
+
+            <div className="border border-line rounded-sm px-6 py-6 mt-8">
+              <p className="text-ink-soft leading-relaxed">
+                I chose Information Management in Technology because it is
+                closely related to my field of study as a Computer Science
+                student. I already have a background in handling and managing
+                data through my academic work, so I have some understanding of
+                the challenges involved in managing information. Since
+                technology systems can handle information from thousands or
+                even millions of users, I wanted to explore how an expert
+                system could assess information-management practices and
+                provide recommendations.
+              </p>
+              <p className="text-sm text-ink-faint italic mt-4">
+                — Project author
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* How it works */}
+        <section className="border-t border-line">
+          <div className="max-w-content mx-auto px-6 sm:px-10 py-16 sm:py-20">
+            <p className="text-xs font-medium text-ink-faint">Process</p>
+            <h2 className="font-serif text-2xl sm:text-3xl text-ink mt-3">
+              How it works
+            </h2>
+
+            <div className="mt-10 grid gap-8 sm:grid-cols-3">
+              {STEPS.map((step) => (
+                <div key={step.n}>
+                  <p className="text-xs text-ink-faint tabular-nums">{step.n}</p>
+                  <p className="text-sm font-medium text-ink mt-2">{step.title}</p>
+                  <p className="text-sm text-ink-soft mt-1.5 leading-relaxed">
+                    {step.body}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="border-t border-line">
+          <div className="max-w-content mx-auto px-6 sm:px-10 py-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <p className="text-xs text-ink-faint">
+              Information Management Expert System
+            </p>
+            <button
+              type="button"
+              onClick={() => navigate("/dashboard")}
+              className="text-sm text-accent hover:text-accent-hover"
+            >
+              Go to Dashboard →
+            </button>
+          </div>
+        </footer>
       </main>
     </div>
   );

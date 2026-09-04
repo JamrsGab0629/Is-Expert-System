@@ -71,7 +71,7 @@ def run_inference(answers_by_id: dict[int, object]) -> dict:
             }
         elif tmpl == "indicator":
             name = str(fact["name"])
-            if name in ("data-scope", "prioritization-basis", "backup-frequency"):
+            if name in ("data-scope", "prioritization-basis", "backup-frequency", "tools-named"):
                 descriptive[name] = str(fact["value"])
 
     return {
